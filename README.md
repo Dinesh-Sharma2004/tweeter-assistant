@@ -134,7 +134,5 @@ Twitter API Rate Limits: If fetch_tweets or post_tweet seems to hang or take a v
 
 This might indicate an issue with the Gemini API response. Ensure your GEMINI_API_KEY is valid and the Gemini service is operational.
 
-Gradio Interface Not Loading:
 
-Ensure app.py is running without errors in your terminal. Check if the port (default 7860) is
 

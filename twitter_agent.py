@@ -66,7 +66,7 @@ def delete_tweet(tweet_id: str) -> str:
     """Deletes a tweet by its ID under the authenticated user context."""
     try:
         print(f"Attempting to delete tweet with ID: {tweet_id}")
-        response = client.destroy_tweet(id=tweet_id)
+        response = client.delete_tweet(id=tweet_id)
         
         data = response.get("data", {})
         

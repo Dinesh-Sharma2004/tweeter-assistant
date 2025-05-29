@@ -33,7 +33,7 @@ def generate_tweet(user_prompt: str) -> str:
     """Generate a short tweet using Google Gemini."""
     try:
         # Define the API endpoint for Gemini
-        apiKey = os.getenv("GEMINI_API_KEY", "") 
+        apiKey = os.getenv("GEMINI_API_KEY", "")
         if not apiKey:
             return "Error: GEMINI_API_KEY not found in environment variables."
 
@@ -51,7 +51,7 @@ def generate_tweet(user_prompt: str) -> str:
 
         # Make the POST request to the Gemini API
         response = requests.post(apiUrl, json=payload)
-        response.raise_for_status() 
+        response.raise_for_status()
 
         result = response.json()
 
@@ -79,18 +79,21 @@ def post_tweet(text: str) -> str:
     except Exception as e:
         return f"Failed to post tweet: {e}"
 
-def fetch_tweets(keyword: str, count: int = 5) -> str:
+def fetch_tweets(keyword: str, count: int = 10) -> str: # Changed default count to 10
     """
     Fetch recent public tweets matching a keyword, including author usernames
     efficiently using expansions.
     """
     try:
+        # Ensure count is within the valid range [10, 100] for Twitter API
+        actual_count = max(10, min(count, 100))
+
         resp = client.search_recent_tweets(
             query=keyword,
-            max_results=count,
+            max_results=actual_count, # Use the adjusted count
             tweet_fields=["author_id", "text"],
-            expansions=["author_id"], 
-            user_fields=["username"]  
+            expansions=["author_id"],
+            user_fields=["username"]
         )
 
         tweets = resp.get("data", [])

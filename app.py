@@ -1,5 +1,6 @@
 import gradio as gr
 from twitter_agent import generate_tweet, post_tweet, fetch_tweets
+import os
 
 def agent_response(user_input, history):
     messages = history or []
@@ -25,4 +26,6 @@ iface = gr.ChatInterface(
     type="messages"    
 )
 
-iface.launch(share=True)
+if __name__ == "__main__":
+    port = int(os.getenv("PORT", 7860))  # fallback to 7860 locally
+    iface.launch(server_name="0.0.0.0", server_port=port)

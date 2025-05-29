@@ -117,4 +117,7 @@ Contributions are welcome! Please open an issue or submit a pull request.
 
 ## License
 
-MIT © Your Name
+MIT © ## License
+
+MIT © 2025 Dinesh Sharma
+

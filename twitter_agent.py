@@ -57,12 +57,12 @@ def post_tweet(text: str) -> str:
     except Exception as e:
         return f"Failed to post tweet: {e}"
 
-def fetch_tweets(keyword: str, count: int = 5) -> str:
+def fetch_tweets(keyword: str) -> str:
     """Fetch recent public tweets matching a keyword."""
     try:
         resp = client.search_recent_tweets(
             query=keyword,
-            max_results=count,
+            max_results=10,
             tweet_fields=["author_id", "text"]
         )
         tweets = resp.get("data", [])

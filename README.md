@@ -65,11 +65,11 @@ TWITTER_ACCESS_TOKEN="YOUR_TWITTER_ACCESS_TOKEN"
 TWITTER_ACCESS_SECRET="YOUR_TWITTER_ACCESS_SECRET"
 
 # Twitter API v2 Bearer Token (for searching tweets)
-# You can generate this from your Twitter Developer App settings
+You can generate this from your Twitter Developer App settings
 TWITTER_BEARER_TOKEN="YOUR_TWITTER_BEARER_TOKEN"
 
 # Twitter OAuth2.0 Client credentials (optional, for future OAuth2 flows)
-# Not strictly used in current implementation but good to have if you intend to expand
+Not strictly used in current implementation but good to have if you intend to expand
 TWITTER_OAUTH2_CLIENT_ID="YOUR_TWITTER_OAUTH2_CLIENT_ID"
 TWITTER_OAUTH2_CLIENT_SECRET="YOUR_TWITTER_OAUTH2_CLIENT_SECRET"
 

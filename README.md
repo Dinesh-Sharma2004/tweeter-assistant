@@ -1,4 +1,4 @@
-##AI Twitter Agent
+## AI Twitter Agent
 This project implements a simple AI-powered Twitter agent that can perform two main actions:
 
 Generate and post a new tweet based on a user prompt, leveraging Google's Gemini AI.
@@ -7,7 +7,7 @@ Fetch recent public tweets matching a specific keyword from Twitter.
 
 The agent is built with a Gradio interface for easy interaction, making it a conversational tool for managing basic Twitter tasks.
 
-#✨ Features
+# ✨ Features
 AI-Powered Tweet Generation: Uses Google's gemini-2.0-flash model to craft concise tweets from your prompts.
 
 Tweet Posting: Publishes generated tweets directly to your authenticated Twitter account.
@@ -18,7 +18,7 @@ Efficient Twitter API Usage: Utilizes Twitter API v2's expansions to fetch user 
 
 User-Friendly Interface: A simple chat-based interface powered by Gradio.
 
-#🛠️ Technologies Used
+# 🛠️ Technologies Used
 Python 3.x
 
 tweepy: A Python library for accessing the Twitter API.
@@ -29,7 +29,7 @@ python-dotenv: For loading environment variables from a .env file.
 
 gradio: For building the interactive web user interface.
 
-#🚀 Setup and Installation
+# 🚀 Setup and Installation
 Follow these steps to get your AI Twitter Agent up and running.
 
 1. Clone the Repository

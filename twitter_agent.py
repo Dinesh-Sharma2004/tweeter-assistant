@@ -1,24 +1,20 @@
 import os
-import requests # Import requests for making HTTP calls
+import requests 
 import tweepy
 from dotenv import load_dotenv
 
 load_dotenv()
 
-# Twitter OAuth1.0a creds
 consumer_key    = os.getenv("TWITTER_API_KEY")
 consumer_secret = os.getenv("TWITTER_API_SECRET")
 access_token    = os.getenv("TWITTER_ACCESS_TOKEN")
 access_secret   = os.getenv("TWITTER_ACCESS_SECRET")
 
-# Twitter OAuth2.0 Client credentials (for future OAuth2 flows)
 oauth2_client_id     = os.getenv("TWITTER_OAUTH2_CLIENT_ID")
 oauth2_client_secret = os.getenv("TWITTER_OAUTH2_CLIENT_SECRET")
 
-# Twitter Bearer token for App-only v2 endpoints
 bearer_token = os.getenv("TWITTER_BEARER_TOKEN")
 
-# Instantiate a Tweepy v2 Client with both OAuth1 and OAuth2 credentials
 client = tweepy.Client(
     bearer_token=bearer_token,
     consumer_key=consumer_key,
@@ -32,14 +28,12 @@ client = tweepy.Client(
 def generate_tweet(user_prompt: str) -> str:
     """Generate a short tweet using Google Gemini."""
     try:
-        # Define the API endpoint for Gemini
         apiKey = os.getenv("GEMINI_API_KEY", "")
         if not apiKey:
             return "Error: GEMINI_API_KEY not found in environment variables."
 
         apiUrl = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={apiKey}"
 
-        # Prepare the payload for the Gemini API request
         payload = {
             "contents": [
                 {
@@ -49,13 +43,11 @@ def generate_tweet(user_prompt: str) -> str:
             ]
         }
 
-        # Make the POST request to the Gemini API
         response = requests.post(apiUrl, json=payload)
         response.raise_for_status()
 
         result = response.json()
-
-        # Extract the generated text from the response
+        
         if result.get("candidates") and len(result["candidates"]) > 0 and \
            result["candidates"][0].get("content") and \
            result["candidates"][0]["content"].get("parts") and \
@@ -79,18 +71,17 @@ def post_tweet(text: str) -> str:
     except Exception as e:
         return f"Failed to post tweet: {e}"
 
-def fetch_tweets(keyword: str, count: int = 10) -> str: # Changed default count to 10
+def fetch_tweets(keyword: str, count: int = 10) -> str: 
     """
     Fetch recent public tweets matching a keyword, including author usernames
     efficiently using expansions.
     """
     try:
-        # Ensure count is within the valid range [10, 100] for Twitter API
         actual_count = max(10, min(count, 100))
 
         resp = client.search_recent_tweets(
             query=keyword,
-            max_results=actual_count, # Use the adjusted count
+            max_results=actual_count,
             tweet_fields=["author_id", "text"],
             expansions=["author_id"],
             user_fields=["username"]
@@ -103,7 +94,6 @@ def fetch_tweets(keyword: str, count: int = 10) -> str: # Changed default count 
         if not tweets:
             return "No tweets found."
 
-        # Create a mapping from user ID to username for efficient lookup
         user_map = {user["id"]: user["username"] for user in users}
 
         results = []

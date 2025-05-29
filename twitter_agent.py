@@ -28,9 +28,8 @@ client = tweepy.Client(
     consumer_secret=consumer_secret,
     access_token=access_token,
     access_token_secret=access_secret,
-    client_id=oauth2_client_id,
-    client_secret=oauth2_client_secret,
-    return_type=dict
+    return_type=dict,
+    wait_on_rate_limit=True
 )
 
 def generate_tweet(user_prompt: str) -> str:

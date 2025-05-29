@@ -1,0 +1,28 @@
+import gradio as gr
+from twitter_agent import generate_tweet, post_tweet, fetch_tweets
+
+def agent_response(user_input, history):
+    messages = history or []
+
+    messages.append({"role": "user", "content": user_input})
+
+    if user_input.strip().lower().startswith("search:"):
+        keyword = user_input.strip()[7:].strip()
+        result = fetch_tweets(keyword)
+    else:
+        tweet_text = generate_tweet(user_input)
+        result = post_tweet(tweet_text)
+
+
+    messages.append({"role": "assistant", "content": result})
+
+    return messages
+
+iface = gr.ChatInterface(
+    fn=agent_response,
+    title="AI Twitter Agent",
+    theme="default",
+    type="messages"    
+)
+
+iface.launch(share=True)

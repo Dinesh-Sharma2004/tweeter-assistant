@@ -13,11 +13,11 @@ def agent_response(user_input, history):
         try:
             tweet_id = user_input.strip()[7:].strip()
             if not tweet_id.isdigit():
-                result = "❌ Error: Please provide a valid tweet ID (numbers only) after 'delete:'."
+                result = "Error: Please provide a valid tweet ID (numbers only) after 'delete:'."
             else:
                 result = delete_tweet(tweet_id)
         except Exception as e:
-            result = f"❌ Error processing delete command: {e}"
+            result = f" Error processing delete command: {e}"
     else: 
         tweet_text = generate_tweet(user_input)
         result = post_tweet(tweet_text)

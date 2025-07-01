@@ -71,25 +71,25 @@ def delete_tweet(tweet_id: str) -> str:
         data = response.get("data", {})
         
         if data.get("deleted", False): 
-            return f"✅ Tweet ID {tweet_id} successfully deleted."
+            return f"Tweet ID {tweet_id} successfully deleted."
         else:
             errors = response.get("errors", [])
             error_messages = [err.get("message", "Unknown error") for err in errors]
-            return f"❌ Failed to delete tweet ID {tweet_id}. Reason: {' '.join(error_messages) or 'Not deleted or not found (check if you own this tweet and ID is correct).'}"
+            return f"Failed to delete tweet ID {tweet_id}. Reason: {' '.join(error_messages) or 'Not deleted or not found (check if you own this tweet and ID is correct).'}"
     
     except tweepy.errors.TweepyException as te:
         print(f"Tweepy API error during delete: {te}")
-        return f"❌ Failed to delete tweet: Twitter API error: {te}"
+        return f" Failed to delete tweet: Twitter API error: {te}"
     except Exception as e:
         print(f"An unexpected error occurred during delete: {e}")
-        return f"❌ Failed to delete tweet: An unexpected error occurred: {e}"
+        return f" Failed to delete tweet: An unexpected error occurred: {e}"
         
 def post_tweet(text: str) -> str:
     """Post a tweet under the authenticated user context."""
     try:
         response = client.create_tweet(text=text)
         data = response.get("data", {})
-        return f"✅ Tweet posted: {data.get('text', '')} (ID: {data.get('id', '')})"
+        return f" Tweet posted: {data.get('text', '')} (ID: {data.get('id', '')})"
     except Exception as e:
         return f"Failed to post tweet: {e}"
 
